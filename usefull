@@ -1,0 +1,7 @@
+
+mkdir google
+git clone https://huggingface.co/google/siglip-so400m-patch14-384
+
+
+python -m scripts.encode_lang
+python main.py  --image_aug -load_from_hdf5 --precomp_lang_embed --resume_from_checkpoint="checkpoints/rdt-finetune-1b/checkpoint-20000"

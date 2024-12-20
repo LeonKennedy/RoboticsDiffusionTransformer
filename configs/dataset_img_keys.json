@@ -571,5 +571,14 @@
             "images0"
         ],
         "image_mask":[1,0,0,0]
+    },
+    "put_puzzle": {
+        "image_keys": [
+            "cam_high",
+            "cam_right_wrist",
+            "cam_left_wrist",
+            "cam_left_wrist"
+        ],
+        "image_mask":[1,1,0,0]
     }
 }
