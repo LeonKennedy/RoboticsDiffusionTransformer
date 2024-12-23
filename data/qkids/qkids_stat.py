@@ -20,10 +20,11 @@ stat = {
     "right_puppet":
         {'mean': np.array(
             [33.48150376, -17.91478238, 72.09764807, 10.49017056, -90.93237872, 15.70857256, 1622.94954054]),
-         'std': np.array([19.83900605, 15.37413166, 27.42137184, 21.16549558, 3.47063697, 15.88744476, 788.56620906]),
-         'max': np.array([86.018, 40.794, 145.584, 66.479, -61.641, 92.465, 3348.]),
-         'min': np.array([-9.805, -66.797, -8.956, -47.034, -114.592, -60.467, 337.])
-         }
+            'std': np.array(
+                [19.83900605, 15.37413166, 27.42137184, 21.16549558, 3.47063697, 15.88744476, 788.56620906]),
+            'max': np.array([86.018, 40.794, 145.584, 66.479, -61.641, 92.465, 3348.]),
+            'min': np.array([-9.805, -66.797, -8.956, -47.034, -114.592, -60.467, 337.])
+        }
 }
 
 
@@ -44,7 +45,17 @@ class Normalizer:
 
     # encode data to [-1, 1]
     def encode(self, x):
-        return 2 * (x - self.min) / (self.max - self.min) - 1
+        if len(x) == 7:
+            out = 2 * (x - self.min) / (self.max - self.min) - 1
+            out[6] = x[6] / 3350
+            return out
+        else:
+            raise Exception
 
     def decode(self, x):
-        return (x + 1) / 2 * (self.max - self.min) + self.min
+        if len(x) == 7:
+            out = (x + 1) / 2 * (self.max - self.min) + self.min
+            out[6] = x[6] * 3350
+            return out
+        else:
+            raise Exception

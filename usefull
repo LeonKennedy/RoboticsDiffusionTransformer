@@ -1,3 +1,5 @@
+1. computer statistic
+2. create hdf5
 
 mkdir google
 git clone https://huggingface.co/google/siglip-so400m-patch14-384

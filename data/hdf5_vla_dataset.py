@@ -36,7 +36,6 @@ class HDF5VLADataset:
         self.STATE_DIM = config['common']['state_dim']
 
         self.length_for_drop = 60
-        self.gripper_max_open = np.array([[1, 1, 1, 1, 1, 1, 3350]])
 
         # Get each episode's len
         episode_lens = []
@@ -161,8 +160,7 @@ class HDF5VLADataset:
             }
 
             # Rescale gripper to [0, 1]
-            qpos = qpos / self.gripper_max_open
-            target_qpos = f['action'][step_id:step_id + self.CHUNK_SIZE] / self.gripper_max_open
+            target_qpos = f['action'][step_id:step_id + self.CHUNK_SIZE]
 
             # Parse the state and action
             state = qpos[step_id:step_id + 1]
@@ -268,8 +266,7 @@ class HDF5VLADataset:
                 raise ValueError("Found no qpos that exceeds the threshold.")
 
             # Rescale gripper to [0, 1]
-            qpos = qpos / self.gripper_max_open
-            target_qpos = f['action'][:] / self.gripper_max_open
+            target_qpos = f['action'][:]
 
             # Parse the state and action
             state = qpos[first_idx - 1:]
